@@ -2,13 +2,18 @@ package com.example.LibraryManagementSystem.services.concretes;
 
 import com.example.LibraryManagementSystem.entities.Book;
 import com.example.LibraryManagementSystem.entities.Loan;
+import com.example.LibraryManagementSystem.repositories.LoanRepository;
 import com.example.LibraryManagementSystem.services.abstracts.LoanService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class LoanServiceImpl implements LoanService {
+    private LoanRepository loanRepository;
+
     @Override
     public void add(Loan loan) {
 
