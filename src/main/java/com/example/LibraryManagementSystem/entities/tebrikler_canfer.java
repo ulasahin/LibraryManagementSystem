@@ -1,4 +1,4 @@
 package com.example.LibraryManagementSystem.entities;
 
-public class emir {
+public class tebrikler_canfer {
 }
