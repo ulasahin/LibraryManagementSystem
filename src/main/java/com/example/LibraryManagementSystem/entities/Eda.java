@@ -1,4 +1,4 @@
 package com.example.LibraryManagementSystem.entities;
 
-public class Book {
+public class Eda {
 }
