@@ -19,8 +19,8 @@ public class User {
     @Setter(AccessLevel.NONE)
     private int id;
 
-    @NotBlank(message = "Username cannot be left blank")
-    @Column(name = "user_name", nullable = false,length = 35)
+
+    @Column(name = "user_name", nullable = false,length = 35, unique = true)
     private String userName;
 
     private String adress;
@@ -28,12 +28,14 @@ public class User {
     @Column(name = "user_phone", length = 11, unique = true)
     private String phoneNumber;
 
-    @Column(name = "user_email", unique = true)
+
+    @Column(name = "user_email", unique = true, nullable = false)
     private String email;
 
+
+    @Column(name = "password", nullable = false)
     private String password;
 
     @OneToMany(mappedBy = "user")
     private List<Book> books;
-
 }
