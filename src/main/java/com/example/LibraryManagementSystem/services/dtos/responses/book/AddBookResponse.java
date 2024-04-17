@@ -10,4 +10,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddBookResponse {
+    private int id;
+    private String name;
+    private String author;
+    private String description;
+
 }

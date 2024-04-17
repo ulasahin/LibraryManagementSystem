@@ -9,9 +9,10 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ListBookResponse {
+public class DeleteBookResponse {
     private int id;
     private String name;
     private String author;
     private String description;
+
 }

@@ -1,4 +1,4 @@
-package com.example.LibraryManagementSystem.services.dtos.responses.book;
+package com.example.LibraryManagementSystem.services.dtos.requests.book;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ListBookResponse {
+public class UpdateBookRequest {
     private int id;
     private String name;
-    private String author;
-    private String description;
 }
