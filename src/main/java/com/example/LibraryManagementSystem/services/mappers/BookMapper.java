@@ -29,5 +29,5 @@ public interface BookMapper {
 
     DeleteBookResponse bookFromDeleteResponse(Book book);
 
-    GetBookResponse getBookResponseFromBook(Book book);
+    GetBookResponse getBookidFromGetResponse(Book book);
 }

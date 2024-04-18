@@ -48,7 +48,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public GetBookResponse getById(int id) {
         Book book = bookRepository.findById(id).orElseThrow();
-        GetBookResponse getBookResponse = BookMapper.INSTANCE.getBookResponseFromBook(book);
+        GetBookResponse getBookResponse = BookMapper.INSTANCE.getBookidFromGetResponse(book);
         return getBookResponse;
     }
 

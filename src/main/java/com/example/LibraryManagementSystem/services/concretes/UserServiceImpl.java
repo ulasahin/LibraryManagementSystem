@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
         User user = UserMapper.INSTANCE.userFromAddRequest(request);
         user = userRepository.save(user);
 
-        AddUserResponse addUserResponse = UserMapper.INSTANCE.addResponseFromUser(user);
+        AddUserResponse addUserResponse = UserMapper.INSTANCE.userFromAddResponse(user);
         return addUserResponse;
     }
 
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
         User user = UserMapper.INSTANCE.userFromUpdateRequest(request);
         user = userRepository.save(user);
 
-        UpdateUserResponse updateUserReponse = UserMapper.INSTANCE.updateResponseFromUser(user);
+        UpdateUserResponse updateUserReponse = UserMapper.INSTANCE.userFromUpdateResponse(user);
         return updateUserReponse;
     }
 
@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
     public DeleteUserResponse delete(DeleteUserRequest request) {
         User user = UserMapper.INSTANCE.userFromDeleteRequest(request);
         userRepository.delete(user);
-        DeleteUserResponse deleteUserResponse = UserMapper.INSTANCE.deleteResponseFromUser(user);
+        DeleteUserResponse deleteUserResponse = UserMapper.INSTANCE.userFromDeleteResponse(user);
         return deleteUserResponse;
         /*User user = UserMapper.INSTANCE.userFromUpdateRequest(request);
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Bu id'ye sahip kullanıcı bulunamadı !"));
