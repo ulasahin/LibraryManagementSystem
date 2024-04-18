@@ -13,6 +13,5 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddBookRequest {
-    private int id;
     private String name;
 }

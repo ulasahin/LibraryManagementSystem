@@ -5,6 +5,7 @@ import com.example.LibraryManagementSystem.services.dtos.requests.user.AddUserRe
 import com.example.LibraryManagementSystem.services.dtos.requests.user.UpdateUserRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.user.*;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +30,7 @@ public class UsersController {
         return userService.update(request);
     }
     @DeleteMapping
-    public DeleteUserResponse delete(@RequestParam int id){
+    public DeleteUserResponse delete(@RequestParam  int id){
         return userService.delete(id);
     }
     @GetMapping(value ="/{id}")

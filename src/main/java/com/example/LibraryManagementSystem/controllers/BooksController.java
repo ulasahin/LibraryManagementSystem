@@ -4,6 +4,7 @@ import com.example.LibraryManagementSystem.services.abstracts.BookService;
 import com.example.LibraryManagementSystem.services.dtos.requests.book.AddBookRequest;
 import com.example.LibraryManagementSystem.services.dtos.requests.book.UpdateBookRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.book.*;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

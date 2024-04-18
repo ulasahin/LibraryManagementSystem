@@ -13,15 +13,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateUserRequest {
-    @NotBlank(message = "İsim kısmı boş olamaz.")
+
     @Size(min=3,max = 50,message = "Kullanıcı adı 3 ila 50 karakter arasında olmalı.")
     private String userName;
 
-    @NotBlank(message = "Şifre alanı boş olamaz.")
+
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z]).{6,}$\n")
     private String password;
 
-    @NotBlank(message = "E-mail alanı boş olamaz.")
+
     private String email;
 
     //@Pattern(regexp="\\s*\\d{11,}\\s*") yapısı çalışmassa başına ve sonuna \n eklenmeli.
