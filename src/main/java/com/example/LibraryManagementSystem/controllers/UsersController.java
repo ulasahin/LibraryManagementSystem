@@ -29,7 +29,7 @@ public class UsersController {
         return userService.update(request);
     }
     @DeleteMapping
-    public DeleteUserResponse delete(@RequestBody int id){
+    public DeleteUserResponse delete(@RequestParam int id){
         return userService.delete(id);
     }
     @GetMapping(value ="/{id}")

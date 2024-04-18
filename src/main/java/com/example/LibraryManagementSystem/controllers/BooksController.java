@@ -5,7 +5,6 @@ import com.example.LibraryManagementSystem.services.dtos.requests.book.AddBookRe
 import com.example.LibraryManagementSystem.services.dtos.requests.book.UpdateBookRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.book.*;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,19 +19,19 @@ public class BooksController {
         return bookService.getAll();
     }
     @PostMapping
-    public AddBookResponse add(AddBookRequest request){
+    public AddBookResponse add(@RequestBody AddBookRequest request){
         return bookService.add(request);
     }
     @PutMapping
-    public UpdateBookResponse update(UpdateBookRequest request){
+    public UpdateBookResponse update(@RequestBody UpdateBookRequest request){
         return bookService.update(request);
     }
     @DeleteMapping
-    public DeleteBookResponse delete(int id){
+    public DeleteBookResponse delete(@RequestParam int id){
         return bookService.delete(id);
     }
     @GetMapping(value = "/{id}")
-    public GetBookResponse getById(int id){
+    public GetBookResponse getById(@RequestParam int id){
         return bookService.getById(id);
     }
 }

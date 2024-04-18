@@ -4,16 +4,13 @@ import com.example.LibraryManagementSystem.entities.User;
 import com.example.LibraryManagementSystem.repositories.UserRepository;
 import com.example.LibraryManagementSystem.services.abstracts.UserService;
 import com.example.LibraryManagementSystem.services.dtos.requests.user.AddUserRequest;
-import com.example.LibraryManagementSystem.services.dtos.requests.user.DeleteUserRequest;
 import com.example.LibraryManagementSystem.services.dtos.requests.user.UpdateUserRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.user.*;
-import com.example.LibraryManagementSystem.services.mappers.BookMapper;
 import com.example.LibraryManagementSystem.services.mappers.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -41,16 +38,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public DeleteUserResponse delete(DeleteUserRequest request) {
-        User user = UserMapper.INSTANCE.userFromDeleteRequest(request);
-        userRepository.delete(user);
+    public DeleteUserResponse delete(int id) {
+
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Bu id'ye sahip kullanıcı bulunamadı!"));
         DeleteUserResponse deleteUserResponse = UserMapper.INSTANCE.userFromDeleteResponse(user);
-        return deleteUserResponse;
-        /*User user = UserMapper.INSTANCE.userFromUpdateRequest(request);
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Bu id'ye sahip kullanıcı bulunamadı !"));
-        DeleteUserResponse deleteUserResponse = UserMapper.INSTANCE.deleteResponseFromUser(user);
         userRepository.delete(user);
-        return deleteUserResponse;*/
+        return deleteUserResponse;
     }
 
     @Override
