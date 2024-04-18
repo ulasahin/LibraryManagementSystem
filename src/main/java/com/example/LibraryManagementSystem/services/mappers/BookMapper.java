@@ -3,6 +3,7 @@ package com.example.LibraryManagementSystem.services.mappers;
 import com.example.LibraryManagementSystem.entities.Book;
 import com.example.LibraryManagementSystem.entities.User;
 import com.example.LibraryManagementSystem.services.dtos.requests.book.AddBookRequest;
+import com.example.LibraryManagementSystem.services.dtos.requests.book.DeleteBookRequest;
 import com.example.LibraryManagementSystem.services.dtos.requests.book.UpdateBookRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.book.AddBookResponse;
 import com.example.LibraryManagementSystem.services.dtos.responses.book.DeleteBookResponse;
@@ -24,8 +25,9 @@ public interface BookMapper {
     Book bookFromUpdateRequest(UpdateBookRequest request);
 
     UpdateBookResponse bookFromUpdateResponse(Book book);
+    Book bookFromDeleteRequest(DeleteBookRequest request);
 
-    DeleteBookResponse bookFromDeleteResponse(int id);
+    DeleteBookResponse bookFromDeleteResponse(Book book);
 
     GetBookResponse getBookResponseFromBook(Book book);
 }

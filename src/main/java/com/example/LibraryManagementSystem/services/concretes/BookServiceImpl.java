@@ -4,6 +4,7 @@ import com.example.LibraryManagementSystem.entities.Book;
 import com.example.LibraryManagementSystem.repositories.BookRepository;
 import com.example.LibraryManagementSystem.services.abstracts.BookService;
 import com.example.LibraryManagementSystem.services.dtos.requests.book.AddBookRequest;
+import com.example.LibraryManagementSystem.services.dtos.requests.book.DeleteBookRequest;
 import com.example.LibraryManagementSystem.services.dtos.requests.book.UpdateBookRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.book.*;
 import com.example.LibraryManagementSystem.services.mappers.BookMapper;
@@ -37,10 +38,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public DeleteBookResponse delete(int id) {
-        Book book = bookRepository.findById(id).orElseThrow();
-        DeleteBookResponse deleteBookResponse = BookMapper.INSTANCE.bookFromDeleteResponse(id);
+    public DeleteBookResponse delete(DeleteBookRequest request) {
+        Book book = BookMapper.INSTANCE.bookFromDeleteRequest(request);
         bookRepository.delete(book);
+        DeleteBookResponse deleteBookResponse = BookMapper.INSTANCE.bookFromDeleteResponse(book);
         return deleteBookResponse;
     }
 

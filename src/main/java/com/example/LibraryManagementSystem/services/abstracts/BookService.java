@@ -11,7 +11,7 @@ import java.util.List;
 public interface BookService {
     AddBookResponse add(AddBookRequest request);
     UpdateBookResponse update(UpdateBookRequest request);
-    DeleteBookResponse delete(int id);
+    DeleteBookResponse delete(DeleteBookRequest request);
     GetBookResponse getById(int id);
     List<ListBookResponse> getAll();
 }
