@@ -20,20 +20,20 @@ public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
     //add mapping
     User userFromAddRequest(AddUserRequest request);
-    AddUserResponse addResponseFromUser(User user);
+    AddUserResponse userFromAddResponse(User user);
     //
 
     //update mapping
     User userFromUpdateRequest(UpdateUserRequest request);
 
-    UpdateUserResponse updateResponseFromUser(User user);
+    UpdateUserResponse userFromUpdateResponse(User user);
 
     //
 
     //delete mapping
 
     User userFromDeleteRequest(DeleteUserRequest request);
-    DeleteUserResponse deleteResponseFromUser(User user);
+    DeleteUserResponse userFromDeleteResponse(User user);
 
     GetUserResponse getUserResponseFromUser(User user);
 }
