@@ -1,5 +1,6 @@
 package com.example.LibraryManagementSystem.services.concretes;
 
+import com.example.LibraryManagementSystem.core.utils.exception.BusinessException;
 import com.example.LibraryManagementSystem.entities.User;
 import com.example.LibraryManagementSystem.repositories.UserRepository;
 import com.example.LibraryManagementSystem.services.abstracts.UserService;
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public DeleteUserResponse delete(int id) {
 
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Bu id'ye sahip kullanıcı bulunamadı!"));
+        User user = userRepository.findById(id).orElseThrow(() -> new BusinessException("Bu id'ye sahip kullanıcı bulunamadı!"));
         DeleteUserResponse deleteUserResponse = UserMapper.INSTANCE.userFromDeleteResponse(user);
         userRepository.delete(user);
         return deleteUserResponse;

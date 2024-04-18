@@ -1,12 +1,15 @@
 package com.example.LibraryManagementSystem.services.concretes;
 
 import com.example.LibraryManagementSystem.entities.Book;
+import com.example.LibraryManagementSystem.entities.User;
 import com.example.LibraryManagementSystem.repositories.BookRepository;
 import com.example.LibraryManagementSystem.services.abstracts.BookService;
 import com.example.LibraryManagementSystem.services.dtos.requests.book.AddBookRequest;
 import com.example.LibraryManagementSystem.services.dtos.requests.book.UpdateBookRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.book.*;
+import com.example.LibraryManagementSystem.services.dtos.responses.user.DeleteUserResponse;
 import com.example.LibraryManagementSystem.services.mappers.BookMapper;
+import com.example.LibraryManagementSystem.services.mappers.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -35,10 +38,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public DeleteBookResponse delete(DeleteBookRequest request) {
-        Book book = BookMapper.INSTANCE.bookFromDeleteRequest(request);
-        bookRepository.delete(book);
+    public DeleteBookResponse delete(int id) {
+
+        Book book = bookRepository.findById(id).orElseThrow(() -> new RuntimeException("Bu id'ye sahip kitap bulunamadı!!"));
         DeleteBookResponse deleteBookResponse = BookMapper.INSTANCE.bookFromDeleteResponse(book);
+        bookRepository.delete(book);
         return deleteBookResponse;
     }
 

@@ -22,7 +22,7 @@ public interface BookMapper {
     Book bookFromUpdateRequest(UpdateBookRequest request);
 
     UpdateBookResponse bookFromUpdateResponse(Book book);
-    Book bookFromDeleteRequest(DeleteBookRequest request);
+
 
     DeleteBookResponse bookFromDeleteResponse(Book book);
 
