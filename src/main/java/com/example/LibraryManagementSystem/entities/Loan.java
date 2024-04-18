@@ -21,14 +21,13 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+
     @Column(name = "issue_date",nullable = false)
     private LocalDate delivery_date;
 
     @Column(name = "due_date", nullable = false)
     private LocalDate dueDate;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id", nullable = false)
-    private Book book;
+
 
 }

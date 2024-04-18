@@ -4,6 +4,8 @@ import com.example.LibraryManagementSystem.entities.Book;
 import com.example.LibraryManagementSystem.entities.Loan;
 import com.example.LibraryManagementSystem.repositories.LoanRepository;
 import com.example.LibraryManagementSystem.services.abstracts.LoanService;
+import com.example.LibraryManagementSystem.services.dtos.requests.book.BorrowBookRequest;
+import com.example.LibraryManagementSystem.services.dtos.responses.book.BorrowBookResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +39,10 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public List<Book> getAll() {
         return List.of();
+    }
+
+    @Override
+    public BorrowBookResponse borrowBook(BorrowBookRequest request) {
+
     }
 }

@@ -27,14 +27,10 @@ public class Book {
     private String author;
     private String description;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id")
-    private User user;
 
     @Enumerated(EnumType.STRING)
     private BookTypes bookTypes;
 
-    @OneToMany(mappedBy = "book")
-    private List<Loan> loans;
+
 
 }
