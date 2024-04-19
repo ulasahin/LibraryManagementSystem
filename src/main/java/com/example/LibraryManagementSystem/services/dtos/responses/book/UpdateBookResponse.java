@@ -14,5 +14,4 @@ public class UpdateBookResponse {
     private String name;
     private String author;
     private String description;
-
 }

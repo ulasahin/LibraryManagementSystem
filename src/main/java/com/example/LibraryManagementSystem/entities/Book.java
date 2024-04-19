@@ -19,18 +19,14 @@ public class Book {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = "id")
     private int id;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
     private String author;
     private String description;
 
-
     @Enumerated(EnumType.STRING)
     private BookTypes bookTypes;
-
-
-
 }

@@ -35,6 +35,7 @@ public class BookServiceImpl implements BookService {
     public UpdateBookResponse update(UpdateBookRequest request) {
         Book book =BookMapper.INSTANCE.bookFromUpdateRequest(request);
         book = bookRepository.save(book);
+
         UpdateBookResponse updateBookResponse = BookMapper.INSTANCE.bookFromUpdateResponse(book);
         return updateBookResponse;
     }
@@ -58,8 +59,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<ListBookResponse> getAll() {
        List<Book> books = bookRepository.findAll();
-      return books.stream().map(b -> new ListBookResponse(b.getId(),b.getName(),
-              b.getAuthor(),b.getDescription())).toList();
+      return books.stream().map(b -> new ListBookResponse(b.getId(),b.getName())).toList();
 
 
     }

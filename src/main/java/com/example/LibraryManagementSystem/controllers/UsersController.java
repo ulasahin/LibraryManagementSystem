@@ -7,6 +7,7 @@ import com.example.LibraryManagementSystem.services.dtos.responses.user.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

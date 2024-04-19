@@ -28,8 +28,6 @@ public interface UserMapper {
     //
 
     //delete mapping
-
-
     DeleteUserResponse userFromDeleteResponse(User user);
 
     GetUserResponse getUserResponseFromUser(User user);

@@ -12,6 +12,4 @@ import lombok.Setter;
 public class ListBookResponse {
     private int id;
     private String name;
-    private String author;
-    private String description;
 }

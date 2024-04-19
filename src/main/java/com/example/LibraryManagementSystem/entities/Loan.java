@@ -21,13 +21,9 @@ public class Loan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-
-    @Column(name = "issue_date",nullable = false)
+    @Column(name = "issue_date")
     private LocalDate delivery_date;
 
-    @Column(name = "due_date", nullable = false)
+    @Column(name = "due_date")
     private LocalDate dueDate;
-
-
-
 }

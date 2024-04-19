@@ -43,6 +43,6 @@ public class LoanServiceImpl implements LoanService {
 
     @Override
     public BorrowBookResponse borrowBook(BorrowBookRequest request) {
-
+        return null;
     }
 }

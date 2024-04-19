@@ -16,27 +16,26 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter(AccessLevel.NONE)
     private int id;
 
 
-    @Column(name = "user_name",length = 35, unique = true)
+    @Column(name = "user_name")
     private String userName;
 
     private String adress;
 
-    @Column(name = "user_phone", length = 11, unique = true)
+    @Column(name = "user_phone")
     private String phoneNumber;
 
 
-    @Column(name = "user_email", unique = true, nullable = false)
+    @Column(name = "user_email")
     private String email;
 
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
 
-    public User(int id) {
-    }
+
+
 }

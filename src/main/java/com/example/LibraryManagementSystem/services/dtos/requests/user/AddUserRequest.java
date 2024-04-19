@@ -1,5 +1,6 @@
 package com.example.LibraryManagementSystem.services.dtos.requests.user;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -13,7 +14,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddUserRequest {
-
     @NotBlank(message = "İsim kısmı boş olamaz.")
     @Size(min=3,max = 50,message = "Kullanıcı adı 3 ila 50 karakter arasında olmalı.")
     private String userName;
@@ -24,12 +24,15 @@ public class AddUserRequest {
     private String password;
 
     @NotBlank(message = "E-mail alanı boş olamaz.")
+    @Email(message = "Geçerli bir Email değil.")
     private String email;
 
-    //@Pattern(regexp="\\s*\\d{11,}\\s*") yapısı çalışmassa başına ve sonuna \n eklenmeli.
-    @Pattern(regexp="\\s*\\d{11,}\\s*" , message = "Numara 11 haneli olmalı.")
+    @NotBlank(message = "Numara kısmı boş olamaz.")
+    @Pattern(regexp= "\\d+" , message = "Sadece numarik ifadalar içermeli.")
+    @Size(min = 11,max = 11, message = "Numara kısmı 11 haneli olmalı.")
     private String phoneNumber;
 
-    @Size(min = 10,max = 300)
+    @NotBlank(message = "Adres kısmı boş olamaz.")
+    @Size(max = 200,message = "Adres kısmı maksimum 200 karakter olabilir.")
     private String adress;
 }

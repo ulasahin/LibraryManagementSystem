@@ -11,6 +11,7 @@ import com.example.LibraryManagementSystem.services.mappers.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,10 +33,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UpdateUserResponse update(UpdateUserRequest request) {
-        User user = UserMapper.INSTANCE.userFromUpdateRequest(request);
-        user = userRepository.save(user);
+        User existingUser = userRepository.findById(request.getId())
+                .orElseThrow(() -> new BusinessException("Güncellenmek istenen kullanıcı bulunamadı!"));
+        for (Field field : UpdateUserRequest.class.getDeclaredFields()) {
+            try {
+                field.setAccessible(true);
+                Object value = field.get(request);
+                if (value != null && !String.valueOf(value).isEmpty()) {
+                    Field userField = User.class.getDeclaredField(field.getName());
+                    userField.setAccessible(true);
+                    userField.set(existingUser, value);
+                }
+            } catch (IllegalAccessException | NoSuchFieldException e) {
+                e.printStackTrace();
+            }
+        }
+        existingUser = userRepository.save(existingUser);
 
-        UpdateUserResponse updateUserReponse = UserMapper.INSTANCE.userFromUpdateResponse(user);
+        UpdateUserResponse updateUserReponse = UserMapper.INSTANCE.userFromUpdateResponse(existingUser);
         return updateUserReponse;
     }
 
@@ -68,7 +83,4 @@ public class UserServiceImpl implements UserService {
             throw new BusinessException("Bu isimde bir kullanıcı zaten var.");
         }
     }
-
-
-
 }
