@@ -25,4 +25,6 @@ public class AddBookRequest {
 
     @Size(max = 200,message = "Açıklama kısmı maksimum 200 karakter olabilir.")
     private String description;
+
+    private int categoryId;
 }

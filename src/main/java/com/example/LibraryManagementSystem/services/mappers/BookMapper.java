@@ -8,6 +8,7 @@ import com.example.LibraryManagementSystem.services.dtos.responses.book.DeleteBo
 import com.example.LibraryManagementSystem.services.dtos.responses.book.GetBookResponse;
 import com.example.LibraryManagementSystem.services.dtos.responses.book.UpdateBookResponse;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 @Mapper
@@ -15,6 +16,7 @@ public interface BookMapper {
 
     BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
 
+    @Mapping(target="category.id", source = "categoryId")
     Book bookFromaddRequest(AddBookRequest request);
 
     AddBookResponse bookFromAddResponse(Book book);
