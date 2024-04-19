@@ -35,19 +35,8 @@ public class UserServiceImpl implements UserService {
     public UpdateUserResponse update(UpdateUserRequest request) {
         User existingUser = userRepository.findById(request.getId())
                 .orElseThrow(() -> new BusinessException("Güncellenmek istenen kullanıcı bulunamadı!"));
-        for (Field field : UpdateUserRequest.class.getDeclaredFields()) {
-            try {
-                field.setAccessible(true);
-                Object value = field.get(request);
-                if (value != null && !String.valueOf(value).isEmpty()) {
-                    Field userField = User.class.getDeclaredField(field.getName());
-                    userField.setAccessible(true);
-                    userField.set(existingUser, value);
-                }
-            } catch (IllegalAccessException | NoSuchFieldException e) {
-                e.printStackTrace();
-            }
-        }
+
+        UserMapper.INSTANCE.userFromUpdateRequest(request, existingUser);
         existingUser = userRepository.save(existingUser);
 
         UpdateUserResponse updateUserReponse = UserMapper.INSTANCE.userFromUpdateResponse(existingUser);
