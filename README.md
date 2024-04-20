@@ -19,6 +19,3 @@ This project is a library management system application developed using Java and
 - Lombok
 - Mapstruct
 
-## Tobeto Assignment
-
-This project has been developed as a part of an homework given by Tobeto.
