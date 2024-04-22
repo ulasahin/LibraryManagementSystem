@@ -1,6 +1,6 @@
 package com.example.LibraryManagementSystem.services.concretes;
 
-import com.example.LibraryManagementSystem.core.utils.exception.BusinessException;
+import com.example.LibraryManagementSystem.core.utils.exception.types.BusinessException;
 import com.example.LibraryManagementSystem.entities.User;
 import com.example.LibraryManagementSystem.repositories.UserRepository;
 import com.example.LibraryManagementSystem.services.abstracts.UserService;
@@ -11,7 +11,6 @@ import com.example.LibraryManagementSystem.services.mappers.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 

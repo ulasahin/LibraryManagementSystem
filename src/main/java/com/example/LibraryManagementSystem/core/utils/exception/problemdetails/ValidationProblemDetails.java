@@ -1,4 +1,4 @@
-package com.example.LibraryManagementSystem.core.utils.exception;
+package com.example.LibraryManagementSystem.core.utils.exception.problemdetails;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

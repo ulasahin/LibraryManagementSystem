@@ -1,8 +1,8 @@
 package com.example.LibraryManagementSystem.core.configurations;
 
-import com.example.LibraryManagementSystem.core.utils.exception.BusinessException;
-import com.example.LibraryManagementSystem.core.utils.exception.ProblemDetails;
-import com.example.LibraryManagementSystem.core.utils.exception.ValidationProblemDetails;
+import com.example.LibraryManagementSystem.core.utils.exception.types.BusinessException;
+import com.example.LibraryManagementSystem.core.utils.exception.problemdetails.ProblemDetails;
+import com.example.LibraryManagementSystem.core.utils.exception.problemdetails.ValidationProblemDetails;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
