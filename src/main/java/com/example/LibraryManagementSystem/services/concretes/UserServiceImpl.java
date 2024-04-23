@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public AddUserResponse add(AddUserRequest request) {
 
-        userNameWithSameNameShouldNotExist(request.getUserName());
+        userNameWithSameNameShouldNotExist(request.getName());
         User user = UserMapper.INSTANCE.userFromAddRequest(request);
         user = userRepository.save(user);
 
@@ -74,11 +74,17 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<ListUserResponse> getAll() {
         List<User> users = userRepository.findAll();
-       return users.stream().map(u -> new ListUserResponse(u.getId(),u.getUserName(),u.getEmail())).toList();
+       return users.stream().map(u -> new ListUserResponse(u.getId(),u.getName(),u.getEmail())).toList();
 
     }
-    private void userNameWithSameNameShouldNotExist(String userName){
-        Optional<User> userWithSameName = userRepository.findByUserNameIgnoreCase(userName);
+
+    @Override
+    public User findById(int id) {
+       return userRepository.findById(id).orElseThrow(() -> new BusinessException("böyle bir id yok"));
+    }
+
+    private void userNameWithSameNameShouldNotExist(String name){
+        Optional<User> userWithSameName = userRepository.findByNameIgnoreCase(name);
         if (userWithSameName.isPresent()){
             throw new BusinessException("Bu isimde bir kullanıcı zaten var.");
         }

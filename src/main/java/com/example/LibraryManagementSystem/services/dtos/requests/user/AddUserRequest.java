@@ -16,7 +16,7 @@ import lombok.Setter;
 public class AddUserRequest {
     @NotBlank(message = "İsim kısmı boş olamaz.")
     @Size(min=3,max = 50,message = "Kullanıcı adı 3 ila 50 karakter arasında olmalı.")
-    private String userName;
+    private String name;
 
     @NotBlank(message = "Şifre alanı boş olamaz.")
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z]).{6,}$"

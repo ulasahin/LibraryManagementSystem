@@ -1,7 +1,6 @@
 package com.example.LibraryManagementSystem.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.util.List;
@@ -18,24 +17,22 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    private double lateFee = 0;
 
-    @Column(name = "user_name")
-    private String userName;
+    private String name;
 
-    private String adress;
+    private String address;
 
-    @Column(name = "user_phone")
     private String phoneNumber;
 
-
-    @Column(name = "user_email")
     private String email;
 
 
     @Column(name = "password")
     private String password;
 
-
+    @OneToMany(mappedBy = "user")
+    private List<Borrow> borrows;
 
 
 }

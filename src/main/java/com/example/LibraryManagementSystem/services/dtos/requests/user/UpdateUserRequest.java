@@ -16,7 +16,7 @@ public class UpdateUserRequest {
     private int id;
 
     @Size(min=0,max = 50,message = "Kullanıcı adı 3 ila 50 karakter arasında olmalı.")
-    private String userName;
+    private String name;
 
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z]).{6,}$"
             ,message = "Şifre en az bir numarik, en az bir tane büyük harf içermeli ve en az 6 karakter olmalıdır.")

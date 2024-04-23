@@ -11,6 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UpdateUserResponse {
     private int id;
-    private String userName;
+    private String name;
     private String email;
 }

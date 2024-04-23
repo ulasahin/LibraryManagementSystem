@@ -26,9 +26,19 @@ public class Book {
     private String name;
     private String author;
     private String description;
+    private boolean isBorrowed=false;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @OneToMany(mappedBy = "book")
+    private List<Borrow> borrowList;
+
+    // Cascade
+    //REMOVE -> bir entity silinirse, ona bağlı entityler de sinilir..
+    // Fetch -> ilişkili verinin ne zaman yükleneceğini belirtir.
+    //LAZY ->Veri başlangıçta değil ilk kulanıldığında yüklenir.
+    //EAGER ->Veri başlangıçta(ana sorguda) yüklenir
+    //
 }
