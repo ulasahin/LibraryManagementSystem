@@ -2,12 +2,9 @@ package com.example.LibraryManagementSystem.services.concretes;
 
 import com.example.LibraryManagementSystem.core.utils.exception.BusinessException;
 import com.example.LibraryManagementSystem.entities.Book;
-import com.example.LibraryManagementSystem.entities.Category;
 import com.example.LibraryManagementSystem.entities.User;
 import com.example.LibraryManagementSystem.repositories.BookRepository;
-import com.example.LibraryManagementSystem.repositories.CategoryRepository;
 import com.example.LibraryManagementSystem.services.abstracts.BookService;
-import com.example.LibraryManagementSystem.services.abstracts.CategoryService;
 import com.example.LibraryManagementSystem.services.dtos.requests.book.AddBookRequest;
 import com.example.LibraryManagementSystem.services.dtos.requests.book.UpdateBookRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.book.*;
@@ -21,21 +18,14 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
-    private CategoryService categoryService;
 
-    public BookServiceImpl(BookRepository bookRepository, CategoryService categoryService) {
-        this.bookRepository = bookRepository;
-        this.categoryService = categoryService;
-    }
 
     @Override
     public AddBookResponse add(AddBookRequest request) {
-
-        Category category = categoryService.findById(request.getCategoryId());
         Book book =BookMapper.INSTANCE.bookFromaddRequest(request);
-        book.setCategory(category);
         book = bookRepository.save(book);
         AddBookResponse addBookResponse = BookMapper.INSTANCE.bookFromAddResponse(book);
         return addBookResponse;
@@ -64,12 +54,6 @@ public class BookServiceImpl implements BookService {
         Book book = bookRepository.findById(id).orElseThrow();
         GetBookResponse getBookResponse = BookMapper.INSTANCE.getBookidFromGetResponse(book);
         return getBookResponse;
-    }
-
-    @Override
-    public Book findById(int id) {
-        //return bookRepository.findById(id).orElseThrow(() -> new RuntimeException("böyle bir id yok"));
-        return bookRepository.findById(id).orElseThrow(()->new BusinessException("böyle bir id yok"));
     }
 
     @Override

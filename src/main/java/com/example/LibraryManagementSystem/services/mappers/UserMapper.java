@@ -8,9 +8,12 @@ import com.example.LibraryManagementSystem.services.dtos.responses.user.DeleteUs
 import com.example.LibraryManagementSystem.services.dtos.responses.user.GetUserResponse;
 import com.example.LibraryManagementSystem.services.dtos.responses.user.UpdateUserResponse;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface UserMapper {
 
 
@@ -21,7 +24,8 @@ public interface UserMapper {
     //
 
     //update mapping
-    User userFromUpdateRequest(UpdateUserRequest request);
+    @Mapping(target = "id", ignore = true)
+    User userFromUpdateRequest(UpdateUserRequest request, @MappingTarget User user);
 
     UpdateUserResponse userFromUpdateResponse(User user);
 

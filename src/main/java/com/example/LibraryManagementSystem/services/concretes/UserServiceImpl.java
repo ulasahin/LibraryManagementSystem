@@ -1,6 +1,6 @@
 package com.example.LibraryManagementSystem.services.concretes;
 
-import com.example.LibraryManagementSystem.core.utils.exception.BusinessException;
+import com.example.LibraryManagementSystem.core.utils.exception.types.BusinessException;
 import com.example.LibraryManagementSystem.entities.User;
 import com.example.LibraryManagementSystem.repositories.UserRepository;
 import com.example.LibraryManagementSystem.services.abstracts.UserService;
@@ -11,7 +11,6 @@ import com.example.LibraryManagementSystem.services.mappers.UserMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,19 +34,8 @@ public class UserServiceImpl implements UserService {
     public UpdateUserResponse update(UpdateUserRequest request) {
         User existingUser = userRepository.findById(request.getId())
                 .orElseThrow(() -> new BusinessException("Güncellenmek istenen kullanıcı bulunamadı!"));
-        for (Field field : UpdateUserRequest.class.getDeclaredFields()) {
-            try {
-                field.setAccessible(true);
-                Object value = field.get(request);
-                if (value != null && !String.valueOf(value).isEmpty()) {
-                    Field userField = User.class.getDeclaredField(field.getName());
-                    userField.setAccessible(true);
-                    userField.set(existingUser, value);
-                }
-            } catch (IllegalAccessException | NoSuchFieldException e) {
-                e.printStackTrace();
-            }
-        }
+
+        UserMapper.INSTANCE.userFromUpdateRequest(request, existingUser);
         existingUser = userRepository.save(existingUser);
 
         UpdateUserResponse updateUserReponse = UserMapper.INSTANCE.userFromUpdateResponse(existingUser);
