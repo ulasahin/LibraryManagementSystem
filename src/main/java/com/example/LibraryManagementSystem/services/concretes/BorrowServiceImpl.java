@@ -11,8 +11,7 @@ import com.example.LibraryManagementSystem.services.abstracts.BorrowService;
 import com.example.LibraryManagementSystem.services.abstracts.UserService;
 import com.example.LibraryManagementSystem.services.dtos.requests.borrow.BorrowAddRequest;
 import com.example.LibraryManagementSystem.services.dtos.requests.borrow.BorrowReturnRequest;
-import com.example.LibraryManagementSystem.services.dtos.responses.borrow.BorrowAddResponse;
-import com.example.LibraryManagementSystem.services.dtos.responses.borrow.BorrowReturnResponse;
+import com.example.LibraryManagementSystem.services.dtos.responses.borrow.*;
 import com.example.LibraryManagementSystem.services.mappers.BorrowMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,16 +27,11 @@ public class BorrowServiceImpl implements BorrowService {
     private UserService userService;
     private BookService bookService;
 
-
-
-
     @Override
     public BorrowAddResponse add(BorrowAddRequest request) {
         User user = userService.findById(request.getUserId());
         Book book = bookService.findById(request.getBookId());
-        if(book.isBorrowed()){
-            throw new BusinessException("Bu kitap daha önce ödünç alındı.");
-        }
+        bookShouldNotBorrow(book);
         book.setBorrowed(true);
         Borrow borrow = BorrowMapper.INSTANCE.borrowFromAddRequest(request);
         borrow.setUser(user);
@@ -67,6 +61,32 @@ public class BorrowServiceImpl implements BorrowService {
         return borrowReturnResponse;
     }
 
+    @Override
+    public DeleteBorrowResponse delete(int id) {
+        Borrow borrow = borrowRepository.findById(id)
+                .orElseThrow(() -> new BusinessException("Böyle bir ödünç alım bulunamadı."));
+        DeleteBorrowResponse deleteBorrowResponse = BorrowMapper.INSTANCE.borrowFromDeleteResponse(borrow);
+        borrowRepository.delete(borrow);
+        return deleteBorrowResponse;
+    }
+
+    @Override
+    public GetBorrowResponse getById(int id) {
+        Borrow borrow = borrowRepository.findById(id)
+                .orElseThrow(()-> new BusinessException("Böyle bir ödünç alım bulunamadı."));
+        GetBorrowResponse getBorrowResponse = BorrowMapper.INSTANCE.borrowFromGetResponse(borrow);
+        return getBorrowResponse;
+    }
+
+    @Override
+    public List<ListBorrowResponse> getAll() {
+        List<Borrow> borrow = borrowRepository.findAll();
+
+        return borrow.stream().map(b -> new ListBorrowResponse(b.getId()
+                ,b.getUser().getName()
+                ,b.getBook().getName())).toList();
+    }
+    //Business Rules
     public void setDate(Borrow borrow,LocalDate startDate,LocalDate endDate){
         borrow.setReceiptDate(startDate);
         borrow.setReturnDate(endDate);
@@ -76,6 +96,11 @@ public class BorrowServiceImpl implements BorrowService {
         if(returnDate.isBefore(deliveryDate)){
             long a = ChronoUnit.DAYS.between(returnDate,deliveryDate);
              borrow.getUser().setLateFee(a*5);
+        }
+    }
+    public void bookShouldNotBorrow(Book book){
+        if(book.isBorrowed()){
+            throw new BusinessException("Bu kitap daha önce ödünç alındı.");
         }
     }
 }

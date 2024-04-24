@@ -13,6 +13,5 @@ public interface UserService {
     DeleteUserResponse delete(int id);
     GetUserResponse getById(int id);
     List<ListUserResponse> getAll();
-
     User findById(int id);
 }

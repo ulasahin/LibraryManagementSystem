@@ -28,7 +28,7 @@ public class AddUserRequest {
     private String email;
 
     @NotBlank(message = "Numara kısmı boş olamaz.")
-    @Pattern(regexp= "\\d+" , message = "Sadece numarik ifadalar içermeli.")
+    @Pattern(regexp= "\\d+" , message = "Sadece numerik ifadeler içermeli.")
     @Size(min = 11,max = 11, message = "Numara kısmı 11 haneli olmalı.")
     private String phoneNumber;
 

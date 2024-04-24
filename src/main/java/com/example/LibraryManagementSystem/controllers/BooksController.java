@@ -26,10 +26,12 @@ public class BooksController {
         return bookService.add(request);
     }
     @PutMapping
-    public UpdateBookResponse update(@RequestBody @Valid UpdateBookRequest request){return bookService.update(request);
+    public UpdateBookResponse update(@RequestBody @Valid UpdateBookRequest request){
+        return bookService.update(request);
     }
     @DeleteMapping
     public DeleteBookResponse delete(@RequestParam int id){
+
         return bookService.delete(id);
     }
     @GetMapping(value = "/{id}")

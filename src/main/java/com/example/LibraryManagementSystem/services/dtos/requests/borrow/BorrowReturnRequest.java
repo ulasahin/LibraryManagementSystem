@@ -1,5 +1,7 @@
 package com.example.LibraryManagementSystem.services.dtos.requests.borrow;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,5 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BorrowReturnRequest {
+    @NotBlank(message = "Ödünç Id'si boş olamaz.")
+    @Pattern(regexp= "\\d+" , message = "Sadece numerik ifadalar içermeli.")
     private int borrowId;
 }

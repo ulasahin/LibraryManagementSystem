@@ -43,7 +43,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public DeleteBookResponse delete(int id) {
 
-        Book book = bookRepository.findById(id).orElseThrow(() -> new BusinessException("Bu id'ye sahip kitap bulunamadı!!"));
+        Book book = bookRepository.findById(id).orElseThrow(() -> new BusinessException("Böyle bir kitap bulanamamıştır."));
         DeleteBookResponse deleteBookResponse = BookMapper.INSTANCE.bookFromDeleteResponse(book);
         bookRepository.delete(book);
         return deleteBookResponse;
@@ -58,15 +58,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Book findById(int id) {
-       return bookRepository.findById(id).orElseThrow(() -> new BusinessException("böyle bir id yok"));
+       return bookRepository.findById(id).orElseThrow(() -> new BusinessException("Böyle bir kitap bulanamamıştır."));
     }
 
     @Override
     public List<ListBookResponse> getAll() {
        List<Book> books = bookRepository.findAll();
       return books.stream().map(b -> new ListBookResponse(b.getId(),b.getName())).toList();
-
-
     }
 }
 

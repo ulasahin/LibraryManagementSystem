@@ -17,7 +17,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
-    private UserRepository userRepository;
+    private  UserRepository userRepository;
 
     @Override
     public AddUserResponse add(AddUserRequest request) {

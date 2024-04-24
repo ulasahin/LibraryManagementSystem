@@ -28,7 +28,7 @@ public class UpdateUserRequest {
     private String email;
 
 
-    @Pattern(regexp= "^(?:\\d{11}|\\d{0})$" , message = "Sadece numarik ifadeler içermeli.")
+    @Pattern(regexp= "^(?:\\d{11}|\\d{0})$" , message = "Sadece numerik ifadeler içermeli.")
     @Size(min = 0,max = 11,message = "Numara kısmı 11 haneli olmalı.")
     private String phoneNumber;
 
