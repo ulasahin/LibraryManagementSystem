@@ -2,7 +2,9 @@ package com.example.LibraryManagementSystem.services.mappers;
 
 import com.example.LibraryManagementSystem.entities.Borrow;
 import com.example.LibraryManagementSystem.services.dtos.requests.borrow.BorrowAddRequest;
+import com.example.LibraryManagementSystem.services.dtos.requests.borrow.BorrowReturnRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.borrow.BorrowAddResponse;
+import com.example.LibraryManagementSystem.services.dtos.responses.borrow.BorrowReturnResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -14,9 +16,16 @@ public interface BorrowMapper {
 
     //@Mapping(target = "book.id",source = "bookId")
 
-    Borrow BorrowFromRequest(BorrowAddRequest request);
+    Borrow borrowFromAddRequest(BorrowAddRequest request);
 
     @Mapping(target = "userName", source ="user.name")
     @Mapping(target = "bookName", source = "book.name")
-    BorrowAddResponse BorrowFromResponse (Borrow borrow);
+    BorrowAddResponse borrowFromAddResponse (Borrow borrow);
+
+    @Mapping(target = "id",source = "borrowId")
+    Borrow borrowFromReturnRequest(BorrowReturnRequest request);
+    @Mapping(target = "userLateFee",source = "user.lateFee")
+    @Mapping(target = "userName",source = "user.name")
+    @Mapping(target = "bookName",source = "book.name")
+    BorrowReturnResponse borrowFromReturnResponse(Borrow borrow);
 }

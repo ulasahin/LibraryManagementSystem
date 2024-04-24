@@ -1,6 +1,6 @@
 package com.example.LibraryManagementSystem.services.concretes;
 
-import com.example.LibraryManagementSystem.core.utils.exception.BusinessException;
+import com.example.LibraryManagementSystem.core.utils.exception.types.BusinessException;
 import com.example.LibraryManagementSystem.entities.Book;
 import com.example.LibraryManagementSystem.entities.User;
 import com.example.LibraryManagementSystem.repositories.BookRepository;
@@ -54,6 +54,11 @@ public class BookServiceImpl implements BookService {
         Book book = bookRepository.findById(id).orElseThrow();
         GetBookResponse getBookResponse = BookMapper.INSTANCE.getBookidFromGetResponse(book);
         return getBookResponse;
+    }
+
+    @Override
+    public Book findById(int id) {
+       return bookRepository.findById(id).orElseThrow(() -> new BusinessException("böyle bir id yok"));
     }
 
     @Override
