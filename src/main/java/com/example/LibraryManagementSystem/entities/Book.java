@@ -28,7 +28,7 @@ public class Book {
     private String description;
     private boolean isBorrowed=false;
 
-    @ManyToOne()
+    @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
 

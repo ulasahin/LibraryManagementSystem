@@ -24,7 +24,6 @@ public class BorrowsController {
     @ResponseStatus(HttpStatus.OK)
     public BorrowReturnResponse returnBook(@RequestBody @Valid BorrowReturnRequest request){return borrowService.returnBook(request);}
     @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public DeleteBorrowResponse delete(@RequestParam int id){
         return borrowService.delete(id);
     }

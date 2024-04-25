@@ -24,7 +24,6 @@ public class CategoryController {
     @ResponseStatus(HttpStatus.OK)
     public UpdateCategoryResponse update(@RequestBody @Valid UpdateCategoryRequest request){return categoryService.update(request);}
     @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public DeleteCategoryResponse delete(@RequestParam int id){return categoryService.delete(id);}
     @GetMapping
     @ResponseStatus(HttpStatus.OK)

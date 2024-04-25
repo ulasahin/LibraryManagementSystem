@@ -2,9 +2,11 @@ package com.example.LibraryManagementSystem.services.concretes;
 
 import com.example.LibraryManagementSystem.core.utils.exception.types.BusinessException;
 import com.example.LibraryManagementSystem.entities.Book;
+import com.example.LibraryManagementSystem.entities.Category;
 import com.example.LibraryManagementSystem.entities.User;
 import com.example.LibraryManagementSystem.repositories.BookRepository;
 import com.example.LibraryManagementSystem.services.abstracts.BookService;
+import com.example.LibraryManagementSystem.services.abstracts.CategoryService;
 import com.example.LibraryManagementSystem.services.dtos.requests.book.AddBookRequest;
 import com.example.LibraryManagementSystem.services.dtos.requests.book.UpdateBookRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.book.*;
@@ -23,6 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
+
 
 
     @Override

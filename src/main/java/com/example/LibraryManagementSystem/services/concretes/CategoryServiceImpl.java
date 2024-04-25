@@ -37,7 +37,6 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public UpdateCategoryResponse update(UpdateCategoryRequest request) {
-        categoryNameWithSameNameShouldNotExist(request.getName());
         Category category = CategoryMapper.INSTANCE.categoryFromUpdateRequest(request);
         category = categoryRepository.save(category);
         UpdateCategoryResponse updateCategoryResponse = CategoryMapper.INSTANCE.categoryFromUpdateResponse(category);

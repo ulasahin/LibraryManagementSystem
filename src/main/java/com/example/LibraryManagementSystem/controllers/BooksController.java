@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,12 +25,12 @@ public class BooksController {
     }
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public AddBookResponse add(@RequestBody @Valid AddBookRequest request){return bookService.add(request);}
+    public AddBookResponse add(@RequestBody @Valid AddBookRequest request){
+        return bookService.add(request);}
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
     public UpdateBookResponse update(@RequestBody @Valid UpdateBookRequest request){return bookService.update(request);}
     @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public DeleteBookResponse delete(@RequestParam int id){return bookService.delete(id);}
     @GetMapping(value = "/{id}")
     @ResponseStatus(HttpStatus.OK)

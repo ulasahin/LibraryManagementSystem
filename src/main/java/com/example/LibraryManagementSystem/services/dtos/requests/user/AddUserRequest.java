@@ -34,5 +34,5 @@ public class AddUserRequest {
 
     @NotBlank(message = "Adres kısmı boş olamaz.")
     @Size(max = 200,message = "Adres kısmı maksimum 200 karakter olabilir.")
-    private String adress;
+    private String address;
 }

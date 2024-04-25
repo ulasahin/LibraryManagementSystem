@@ -27,6 +27,7 @@ public interface BorrowMapper {
 
     @Mapping(target = "id",source = "borrowId")
     Borrow borrowFromReturnRequest(BorrowReturnRequest request);
+
     @Mapping(target = "userLateFee",source = "user.lateFee")
     @Mapping(target = "userName",source = "user.name")
     @Mapping(target = "bookName",source = "book.name")
@@ -34,6 +35,8 @@ public interface BorrowMapper {
 
     DeleteBorrowResponse borrowFromDeleteResponse(Borrow borrow);
 
+    @Mapping(target = "userName",source = "user.name")
+    @Mapping(target = "bookName",source = "book.name")
     GetBorrowResponse borrowFromGetResponse(Borrow borrow);
 
 }

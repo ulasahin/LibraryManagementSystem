@@ -21,7 +21,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AddUserResponse add(AddUserRequest request) {
-
         userNameWithSameNameShouldNotExist(request.getName());
         User user = UserMapper.INSTANCE.userFromAddRequest(request);
         user = userRepository.save(user);

@@ -33,7 +33,6 @@ public class UsersController {
     @ResponseStatus(HttpStatus.OK)
     public UpdateUserResponse update(@RequestBody @Valid UpdateUserRequest request){return userService.update(request);}
     @DeleteMapping
-    @ResponseStatus(HttpStatus.NO_CONTENT)
     public DeleteUserResponse delete(@RequestParam  int id){
         return userService.delete(id);
     }
