@@ -21,6 +21,7 @@ public class Category {
     private int id;
 
     private String name;
+
     @OneToMany(mappedBy = "category")
     private List<Book> books;
 }

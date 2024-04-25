@@ -25,7 +25,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public AddBookResponse add(AddBookRequest request) {
-        Book book =BookMapper.INSTANCE.bookFromaddRequest(request);
+        Book book = BookMapper.INSTANCE.bookFromaddRequest(request);
         book = bookRepository.save(book);
         AddBookResponse addBookResponse = BookMapper.INSTANCE.bookFromAddResponse(book);
         return addBookResponse;
@@ -35,7 +35,6 @@ public class BookServiceImpl implements BookService {
     public UpdateBookResponse update(UpdateBookRequest request) {
         Book book =BookMapper.INSTANCE.bookFromUpdateRequest(request);
         book = bookRepository.save(book);
-
         UpdateBookResponse updateBookResponse = BookMapper.INSTANCE.bookFromUpdateResponse(book);
         return updateBookResponse;
     }
@@ -43,7 +42,8 @@ public class BookServiceImpl implements BookService {
     @Override
     public DeleteBookResponse delete(int id) {
 
-        Book book = bookRepository.findById(id).orElseThrow(() -> new BusinessException("Böyle bir kitap bulanamamıştır."));
+        Book book = bookRepository.findById(id)
+                .orElseThrow(() -> new BusinessException("Böyle bir kitap bulanamamıştır."));
         DeleteBookResponse deleteBookResponse = BookMapper.INSTANCE.bookFromDeleteResponse(book);
         bookRepository.delete(book);
         return deleteBookResponse;
@@ -51,7 +51,8 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public GetBookResponse getById(int id) {
-        Book book = bookRepository.findById(id).orElseThrow();
+        Book book = bookRepository.findById(id)
+                .orElseThrow(()-> new BusinessException("Böyle bir ID'ye sahip kitap bulunamadı."));
         GetBookResponse getBookResponse = BookMapper.INSTANCE.getBookidFromGetResponse(book);
         return getBookResponse;
     }
