@@ -33,7 +33,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public AddBookResponse add(AddBookRequest request) {
         Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow();
+                .orElseThrow(()-> new BusinessException("Kategori kısmındaki ID hiçbir kategoriye ait değil."));
         Book book = BookMapper.INSTANCE.bookFromaddRequest(request);
         book.setCategory(category);
         book = bookRepository.save(book);
