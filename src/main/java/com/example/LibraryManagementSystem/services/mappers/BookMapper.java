@@ -16,7 +16,6 @@ public interface BookMapper {
 
     BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
 
-    @Mapping(target="category.id", source = "categoryId")
     Book bookFromaddRequest(AddBookRequest request);
 
     @Mapping(target = "categoryName", source = "category.name")

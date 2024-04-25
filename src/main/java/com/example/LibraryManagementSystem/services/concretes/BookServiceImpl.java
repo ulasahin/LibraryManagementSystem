@@ -5,6 +5,7 @@ import com.example.LibraryManagementSystem.entities.Book;
 import com.example.LibraryManagementSystem.entities.Category;
 import com.example.LibraryManagementSystem.entities.User;
 import com.example.LibraryManagementSystem.repositories.BookRepository;
+import com.example.LibraryManagementSystem.repositories.CategoryRepository;
 import com.example.LibraryManagementSystem.services.abstracts.BookService;
 import com.example.LibraryManagementSystem.services.abstracts.CategoryService;
 import com.example.LibraryManagementSystem.services.dtos.requests.book.AddBookRequest;
@@ -25,12 +26,16 @@ import java.util.List;
 @AllArgsConstructor
 public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
+    private CategoryRepository categoryRepository;
 
 
 
     @Override
     public AddBookResponse add(AddBookRequest request) {
+        Category category = categoryRepository.findById(request.getCategoryId())
+                .orElseThrow();
         Book book = BookMapper.INSTANCE.bookFromaddRequest(request);
+        book.setCategory(category);
         book = bookRepository.save(book);
         AddBookResponse addBookResponse = BookMapper.INSTANCE.bookFromAddResponse(book);
         return addBookResponse;
