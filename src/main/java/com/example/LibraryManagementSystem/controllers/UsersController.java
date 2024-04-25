@@ -7,6 +7,7 @@ import com.example.LibraryManagementSystem.services.dtos.responses.user.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,22 +20,25 @@ public class UsersController {
     private UserService userService;
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<ListUserResponse> getAll(){
         return userService.getAll();
     }
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public AddUserResponse add(@RequestBody @Valid AddUserRequest request){
         return userService.add(request);
     }
     @PutMapping
-    public UpdateUserResponse update(@RequestBody @Valid UpdateUserRequest request){
-        return userService.update(request);
-    }
+    @ResponseStatus(HttpStatus.OK)
+    public UpdateUserResponse update(@RequestBody @Valid UpdateUserRequest request){return userService.update(request);}
     @DeleteMapping
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public DeleteUserResponse delete(@RequestParam  int id){
         return userService.delete(id);
     }
     @GetMapping(value ="/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public GetUserResponse getByIdFromUser(@PathVariable int id){
         return userService.getById(id);
     }

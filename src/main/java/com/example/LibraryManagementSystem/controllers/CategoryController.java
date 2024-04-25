@@ -6,6 +6,7 @@ import com.example.LibraryManagementSystem.services.dtos.requests.category.Updat
 import com.example.LibraryManagementSystem.services.dtos.responses.category.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,24 +16,20 @@ import java.util.List;
 @AllArgsConstructor
 public class CategoryController {
     private CategoryService categoryService;
+
     @PostMapping
-    public AddCategoryResponse add(@RequestBody @Valid AddCategoryRequest request){
-        return categoryService.add(request);
-    }
+    @ResponseStatus(HttpStatus.CREATED)
+    public AddCategoryResponse add(@RequestBody @Valid AddCategoryRequest request){return categoryService.add(request);}
     @PutMapping
-    public UpdateCategoryResponse update(@RequestBody @Valid UpdateCategoryRequest request){
-        return categoryService.update(request);
-    }
+    @ResponseStatus(HttpStatus.OK)
+    public UpdateCategoryResponse update(@RequestBody @Valid UpdateCategoryRequest request){return categoryService.update(request);}
     @DeleteMapping
-    public DeleteCategoryResponse delete(@RequestParam int id){
-        return categoryService.delete(id);
-    }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public DeleteCategoryResponse delete(@RequestParam int id){return categoryService.delete(id);}
     @GetMapping
-    public List<ListCategoryResponse> getAll(){
-        return categoryService.getAll();
-    }
+    @ResponseStatus(HttpStatus.OK)
+    public List<ListCategoryResponse> getAll(){return categoryService.getAll();}
     @GetMapping(value = "/{id}")
-    public GetCategoryResponse getById(int id){
-        return categoryService.getById(id);
-    }
+    @ResponseStatus(HttpStatus.OK)
+    public GetCategoryResponse getById(int id){return categoryService.getById(id);}
 }

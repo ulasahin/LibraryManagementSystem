@@ -7,6 +7,7 @@ import com.example.LibraryManagementSystem.services.dtos.responses.book.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,24 +18,21 @@ import java.util.List;
 public class BooksController {
     private BookService bookService;
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     public List<ListBookResponse> getAll(){
         return bookService.getAll();
     }
     @PostMapping
-    public AddBookResponse add(@RequestBody @Valid AddBookRequest request){
-
-        return bookService.add(request);
-    }
+    @ResponseStatus(HttpStatus.CREATED)
+    public AddBookResponse add(@RequestBody @Valid AddBookRequest request){return bookService.add(request);}
     @PutMapping
-    public UpdateBookResponse update(@RequestBody @Valid UpdateBookRequest request){
-        return bookService.update(request);
-    }
+    @ResponseStatus(HttpStatus.OK)
+    public UpdateBookResponse update(@RequestBody @Valid UpdateBookRequest request){return bookService.update(request);}
     @DeleteMapping
-    public DeleteBookResponse delete(@RequestParam int id){
-
-        return bookService.delete(id);
-    }
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public DeleteBookResponse delete(@RequestParam int id){return bookService.delete(id);}
     @GetMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public GetBookResponse getById(@RequestParam int id){
         return bookService.getById(id);
     }

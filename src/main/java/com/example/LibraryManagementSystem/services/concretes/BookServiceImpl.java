@@ -13,7 +13,9 @@ import com.example.LibraryManagementSystem.services.mappers.BookMapper;
 import com.example.LibraryManagementSystem.services.mappers.UserMapper;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.List;
 
