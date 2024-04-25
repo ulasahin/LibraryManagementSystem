@@ -12,7 +12,5 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BorrowReturnRequest {
-    @NotBlank(message = "Ödünç Id'si boş olamaz.")
-    @Pattern(regexp= "\\d+" , message = "Sadece numerik ifadalar içermeli.")
     private int borrowId;
 }
