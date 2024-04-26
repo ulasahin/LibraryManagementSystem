@@ -14,6 +14,5 @@ public class AddBookResponse {
     private String name;
     private String author;
     private String description;
-    private int categoryId;
     private String categoryName;
 }

@@ -23,6 +23,7 @@ public interface BookMapper {
 
     Book bookFromUpdateRequest(UpdateBookRequest request);
 
+    @Mapping(target = "categoryName", source = "category.name")
     UpdateBookResponse bookFromUpdateResponse(Book book);
 
     DeleteBookResponse bookFromDeleteResponse(Book book);

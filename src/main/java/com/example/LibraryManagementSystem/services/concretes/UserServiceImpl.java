@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findById(int id) {
-       return userRepository.findById(id).orElseThrow(() -> new BusinessException("böyle bir id yok"));
+       return userRepository.findById(id).orElseThrow(() -> new BusinessException("Böyle bir kullanıcı bulunamamıştır."));
     }
 
     private void userNameWithSameNameShouldNotExist(String name){

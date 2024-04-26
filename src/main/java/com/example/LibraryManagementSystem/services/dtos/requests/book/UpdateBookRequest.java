@@ -21,4 +21,6 @@ public class UpdateBookRequest {
 
     @Size(min = 0,max = 200)
     private String description;
+
+    private int categoryId;
 }

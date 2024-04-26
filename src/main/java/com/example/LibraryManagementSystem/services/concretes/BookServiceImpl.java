@@ -26,14 +26,11 @@ import java.util.List;
 @AllArgsConstructor
 public class BookServiceImpl implements BookService {
     private BookRepository bookRepository;
-    private CategoryRepository categoryRepository;
-
-
+    private CategoryService categoryService;
 
     @Override
     public AddBookResponse add(AddBookRequest request) {
-        Category category = categoryRepository.findById(request.getCategoryId())
-                .orElseThrow(()-> new BusinessException("Kategori kısmındaki ID hiçbir kategoriye ait değil."));
+        Category category = categoryService.findById(request.getCategoryId());
         Book book = BookMapper.INSTANCE.bookFromaddRequest(request);
         book.setCategory(category);
         book = bookRepository.save(book);
@@ -43,7 +40,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public UpdateBookResponse update(UpdateBookRequest request) {
-        Book book =BookMapper.INSTANCE.bookFromUpdateRequest(request);
+        Category category = categoryService.findById(request.getCategoryId());
+        Book book = BookMapper.INSTANCE.bookFromUpdateRequest(request);
+        book.setCategory(category);
         book = bookRepository.save(book);
         UpdateBookResponse updateBookResponse = BookMapper.INSTANCE.bookFromUpdateResponse(book);
         return updateBookResponse;
@@ -51,7 +50,6 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public DeleteBookResponse delete(int id) {
-
         Book book = bookRepository.findById(id)
                 .orElseThrow(() -> new BusinessException("Böyle bir kitap bulanamamıştır."));
         DeleteBookResponse deleteBookResponse = BookMapper.INSTANCE.bookFromDeleteResponse(book);
