@@ -13,7 +13,7 @@ public class ValidationProblemDetails extends ProblemDetails{
     private List<String> errors;
 
     public ValidationProblemDetails(List<String> errors){
-        setDetail("oner or more validaton errors");
+        setDetail("One or more validaton errors");
         setType("ValidationException");
         setTitle("Validation Rule Violation");
         this.errors=errors;
