@@ -16,7 +16,6 @@ import java.util.List;
 public interface BorrowMapper {
     BorrowMapper INSTANCE = Mappers.getMapper(BorrowMapper.class);
 
-
     //@Mapping(target = "book.id",source = "bookId")
 
     Borrow borrowFromAddRequest(BorrowAddRequest request);

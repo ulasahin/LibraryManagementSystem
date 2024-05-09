@@ -46,7 +46,8 @@ public class BorrowServiceImpl implements BorrowService {
 
     @Override
     public BorrowReturnResponse returnBook(BorrowReturnRequest request) {
-        Borrow borrow = borrowRepository.findById(request.getBorrowId()).orElseThrow(() -> new BusinessException("Böyle bir ödünç alma işlemi yok."));
+        Borrow borrow = borrowRepository.findById(request.getBorrowId()).orElseThrow(()
+                -> new BusinessException("Böyle bir ödünç alma işlemi yok."));
         Borrow borrow1 = BorrowMapper.INSTANCE.borrowFromReturnRequest(request);
         borrow1.setReceiptDate(borrow.getReceiptDate());
         borrow1.setReturnDate(borrow.getReturnDate());
