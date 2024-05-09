@@ -1,4 +1,4 @@
-package com.example.LibraryManagementSystem.core.utils.exception.problemdetails;
+package com.example.LibraryManagementSystem.core.exceptionhandling.exception.problemdetails;
 
 public class BusinessProblemDetails extends ProblemDetails{
     public BusinessProblemDetails(String detail){

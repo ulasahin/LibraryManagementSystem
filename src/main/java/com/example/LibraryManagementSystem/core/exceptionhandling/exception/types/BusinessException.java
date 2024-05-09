@@ -1,4 +1,4 @@
-package com.example.LibraryManagementSystem.core.utils.exception.types;
+package com.example.LibraryManagementSystem.core.exceptionhandling.exception.types;
 
 public class BusinessException extends RuntimeException{
     public BusinessException(String message) {

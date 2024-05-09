@@ -1,6 +1,6 @@
 package com.example.LibraryManagementSystem.services.concretes;
 
-import com.example.LibraryManagementSystem.core.utils.exception.types.BusinessException;
+import com.example.LibraryManagementSystem.core.exceptionhandling.exception.types.BusinessException;
 import com.example.LibraryManagementSystem.entities.Category;
 import com.example.LibraryManagementSystem.repositories.CategoryRepository;
 import com.example.LibraryManagementSystem.services.abstracts.CategoryService;

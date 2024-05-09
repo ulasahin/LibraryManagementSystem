@@ -1,6 +1,6 @@
 package com.example.LibraryManagementSystem.services.concretes;
 
-import com.example.LibraryManagementSystem.core.utils.exception.types.BusinessException;
+import com.example.LibraryManagementSystem.core.exceptionhandling.exception.types.BusinessException;
 import com.example.LibraryManagementSystem.entities.Book;
 import com.example.LibraryManagementSystem.entities.Borrow;
 import com.example.LibraryManagementSystem.entities.BorrowStatus;
