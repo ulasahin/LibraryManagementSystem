@@ -48,7 +48,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req->
                         req
-                                .requestMatchers("/api/v1/books/**").authenticated()
+                                .requestMatchers("/api/books/**").authenticated()
                                 .anyRequest().permitAll()
                 )
                 .httpBasic(AbstractHttpConfigurer::disable)
