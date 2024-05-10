@@ -9,6 +9,8 @@ import com.example.LibraryManagementSystem.services.dtos.requests.user.UpdateUse
 import com.example.LibraryManagementSystem.services.dtos.responses.user.*;
 import com.example.LibraryManagementSystem.services.mappers.UserMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -75,5 +77,10 @@ public class UserServiceImpl implements UserService {
         if (userWithSameName.isPresent()){
             throw new BusinessException("Bu isimde bir kullanıcı zaten var.");
         }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByEmail(username).orElseThrow();
     }
 }
