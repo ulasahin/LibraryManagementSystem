@@ -19,7 +19,7 @@ public class UpdateUserRequest {
     private String name;
 
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z]).{6,}$"
-            ,message = "Şifre en az bir numarik, en az bir tane büyük harf içermeli ve en az 6 karakter olmalıdır.")
+            ,message = "Şifre en az bir numerik, en az bir tane büyük harf içermeli ve en az 6 karakter olmalıdır.")
     @Size(min = 0)
     private String password;
 
@@ -27,7 +27,7 @@ public class UpdateUserRequest {
     @Email(message = "Geçerli bir Email değil.")
     private String email;
 
-    @Pattern(regexp= "^(?:\\d{11}|\\d{0})$" , message = "Sadece numerik ifadeler içermeli.")
+    @Pattern(regexp= "^(?:\\d{11}|\\d{0})$" , message = "Numara sadece numerik ifadeler içermeli.")
     @Size(min = 0,max = 11,message = "Numara kısmı 11 haneli olmalı.")
     private String phoneNumber;
 

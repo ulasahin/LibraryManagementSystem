@@ -20,7 +20,7 @@ public class AddUserRequest {
 
     @NotBlank(message = "Şifre alanı boş olamaz.")
     @Pattern(regexp = "^(?=.*[0-9])(?=.*[A-Z]).{6,}$"
-            ,message = "Şifre en az bir numarik, en az bir tane büyük harf içermeli ve en az 6 karakter olmalıdır.")
+            ,message = "Şifre en az bir numerik, en az bir tane büyük harf içermeli ve en az 6 karakter olmalıdır.")
     private String password;
 
     @NotBlank(message = "E-mail alanı boş olamaz.")
@@ -28,7 +28,7 @@ public class AddUserRequest {
     private String email;
 
     @NotBlank(message = "Numara kısmı boş olamaz.")
-    @Pattern(regexp= "\\d+" , message = "Sadece numerik ifadeler içermeli.")
+    @Pattern(regexp= "\\d+" , message = "Numara sadece numerik ifadeler içermeli.")
     @Size(min = 11,max = 11, message = "Numara kısmı 11 haneli olmalı.")
     private String phoneNumber;
 
