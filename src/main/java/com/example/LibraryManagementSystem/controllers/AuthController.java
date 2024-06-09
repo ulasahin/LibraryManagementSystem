@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
     private final AuthService authService;
 
-    @PostMapping("login")
+    @PostMapping("login" )
     @ResponseStatus(HttpStatus.CREATED)
     public String login(@RequestBody LoginRequest loginRequest)
     {
