@@ -1,7 +1,6 @@
 package com.example.LibraryManagementSystem.repositories;
 
-import com.example.LibraryManagementSystem.entities.User;
-import com.example.LibraryManagementSystem.services.dtos.requests.user.AddUserRequest;
+import com.example.LibraryManagementSystem.model.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

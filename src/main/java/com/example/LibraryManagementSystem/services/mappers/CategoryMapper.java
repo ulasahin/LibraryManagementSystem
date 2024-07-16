@@ -1,6 +1,6 @@
 package com.example.LibraryManagementSystem.services.mappers;
 
-import com.example.LibraryManagementSystem.entities.Category;
+import com.example.LibraryManagementSystem.model.entities.Category;
 import com.example.LibraryManagementSystem.services.dtos.requests.category.AddCategoryRequest;
 import com.example.LibraryManagementSystem.services.dtos.requests.category.UpdateCategoryRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.category.AddCategoryResponse;

@@ -1,10 +1,10 @@
 package com.example.LibraryManagementSystem.services.concretes;
 
 import com.example.LibraryManagementSystem.core.exceptionhandling.exception.types.BusinessException;
-import com.example.LibraryManagementSystem.entities.Book;
-import com.example.LibraryManagementSystem.entities.Borrow;
-import com.example.LibraryManagementSystem.entities.BorrowStatus;
-import com.example.LibraryManagementSystem.entities.User;
+import com.example.LibraryManagementSystem.model.entities.Book;
+import com.example.LibraryManagementSystem.model.entities.Borrow;
+import com.example.LibraryManagementSystem.model.enums.BorrowStatus;
+import com.example.LibraryManagementSystem.model.entities.User;
 import com.example.LibraryManagementSystem.repositories.BorrowRepository;
 import com.example.LibraryManagementSystem.services.abstracts.BookService;
 import com.example.LibraryManagementSystem.services.abstracts.BorrowService;
@@ -13,7 +13,9 @@ import com.example.LibraryManagementSystem.services.dtos.requests.borrow.BorrowA
 import com.example.LibraryManagementSystem.services.dtos.requests.borrow.BorrowReturnRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.borrow.*;
 import com.example.LibraryManagementSystem.services.mappers.BorrowMapper;
+import com.example.LibraryManagementSystem.services.rules.BorrowBusinesRule;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -26,19 +28,21 @@ public class BorrowServiceImpl implements BorrowService {
     private BorrowRepository borrowRepository;
     private UserService userService;
     private BookService bookService;
+    @Autowired
+    private BorrowBusinesRule borrowBusinesRule;
 
     @Override
     public BorrowAddResponse add(BorrowAddRequest request) {
         User user = userService.findById(request.getUserId());
         Book book = bookService.findById(request.getBookId());
-        bookShouldNotBorrow(book);
+        borrowBusinesRule.bookShouldNotBorrow(book);
         book.setBorrowed(true);
         Borrow borrow = BorrowMapper.INSTANCE.borrowFromAddRequest(request);
         borrow.setUser(user);
         borrow.setBook(book);
         //borrow.setReceiptDate(LocalDate.now());
         //borrow.setReturnDate(LocalDate.now().plusDays(10));
-        setDate(borrow,LocalDate.now(),LocalDate.now().plusDays(10));
+        borrowBusinesRule.setDate(borrow,LocalDate.now(),LocalDate.now().plusDays(10));
         borrow = borrowRepository.save(borrow);
         BorrowAddResponse borrowAddResponse = BorrowMapper.INSTANCE.borrowFromAddResponse(borrow);
         return borrowAddResponse;
@@ -56,7 +60,7 @@ public class BorrowServiceImpl implements BorrowService {
         borrow1.setDeliveryDate(LocalDate.now());
         borrow1.setBorrowStatus(BorrowStatus.RETURNED);
         borrow1.getBook().setBorrowed(false);
-        deliveryDateShouldNotLate(borrow.getReturnDate(),LocalDate.now(),borrow1);
+        borrowBusinesRule.deliveryDateShouldNotLate(borrow.getReturnDate(),LocalDate.now(),borrow1);
         borrow1 = borrowRepository.save(borrow1);
         BorrowReturnResponse borrowReturnResponse = BorrowMapper.INSTANCE.borrowFromReturnResponse(borrow1);
         return borrowReturnResponse;
@@ -86,22 +90,5 @@ public class BorrowServiceImpl implements BorrowService {
         return borrow.stream().map(b -> new ListBorrowResponse(b.getId()
                 ,b.getUser().getName()
                 ,b.getBook().getName())).toList();
-    }
-    //Business Rules
-    public void setDate(Borrow borrow,LocalDate startDate,LocalDate endDate){
-        borrow.setReceiptDate(startDate);
-        borrow.setReturnDate(endDate);
-    }
-    public void deliveryDateShouldNotLate(LocalDate returnDate, LocalDate deliveryDate,Borrow borrow){
-
-        if(returnDate.isBefore(deliveryDate)){
-            long a = ChronoUnit.DAYS.between(returnDate,deliveryDate);
-             borrow.getUser().setLateFee(a*5);
-        }
-    }
-    public void bookShouldNotBorrow(Book book){
-        if(book.isBorrowed()){
-            throw new BusinessException("Bu kitap daha önce ödünç alındı.");
-        }
     }
 }

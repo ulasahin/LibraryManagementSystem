@@ -1,13 +1,15 @@
 package com.example.LibraryManagementSystem.services.concretes;
 
 import com.example.LibraryManagementSystem.core.exceptionhandling.exception.types.BusinessException;
-import com.example.LibraryManagementSystem.entities.Category;
+import com.example.LibraryManagementSystem.model.entities.Category;
 import com.example.LibraryManagementSystem.repositories.CategoryRepository;
 import com.example.LibraryManagementSystem.services.abstracts.CategoryService;
 import com.example.LibraryManagementSystem.services.dtos.requests.category.AddCategoryRequest;
 import com.example.LibraryManagementSystem.services.dtos.requests.category.UpdateCategoryRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.category.*;
 import com.example.LibraryManagementSystem.services.mappers.CategoryMapper;
+import com.example.LibraryManagementSystem.services.rules.CategoryBusinessRule;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,11 +17,10 @@ import java.util.Optional;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
+    @Autowired
     private CategoryRepository categoryRepository;
-
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
-        this.categoryRepository = categoryRepository;
-    }
+    @Autowired
+    private CategoryBusinessRule categoryBusinessRule;
 
     @Override
     public Category findById(int id) {
@@ -28,7 +29,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public AddCategoryResponse add(AddCategoryRequest request) {
-        categoryNameWithSameNameShouldNotExist(request.getName());
+        categoryBusinessRule.categoryNameWithSameNameShouldNotExist(request.getName());
         Category category = CategoryMapper.INSTANCE.categoryFromAddRequest(request);
         category = categoryRepository.save(category);
         AddCategoryResponse addCategoryResponse = CategoryMapper.INSTANCE.categoryFromAddResponse(category);
@@ -65,10 +66,5 @@ public class CategoryServiceImpl implements CategoryService {
         List<Category> categories = categoryRepository.findAll();
         return categories.stream().map(c-> new ListCategoryResponse(c.getId(),c.getName())).toList();
     }
-    private void categoryNameWithSameNameShouldNotExist(String name){
-        Optional<Category> categoryWithSameName = categoryRepository.findByNameIgnoreCase(name);
-        if (categoryWithSameName.isPresent()){
-            throw new BusinessException("Bu isim bir kategori zaten var.");
-        }
-    }
+
 }

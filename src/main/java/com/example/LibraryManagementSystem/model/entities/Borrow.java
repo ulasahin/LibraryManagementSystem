@@ -1,5 +1,6 @@
-package com.example.LibraryManagementSystem.entities;
+package com.example.LibraryManagementSystem.model.entities;
 
+import com.example.LibraryManagementSystem.model.enums.BorrowStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Table(name = "borrows")
 @Entity

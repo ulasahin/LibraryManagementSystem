@@ -1,7 +1,5 @@
 package com.example.LibraryManagementSystem.services.abstracts;
 
-import com.example.LibraryManagementSystem.entities.Book;
-import com.example.LibraryManagementSystem.entities.Borrow;
 import com.example.LibraryManagementSystem.services.dtos.requests.borrow.BorrowAddRequest;
 import com.example.LibraryManagementSystem.services.dtos.requests.borrow.BorrowReturnRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.borrow.*;

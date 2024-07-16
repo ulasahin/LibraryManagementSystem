@@ -2,7 +2,7 @@ package com.example.LibraryManagementSystem.services.concretes;
 
 import com.example.LibraryManagementSystem.core.exceptionhandling.exception.types.BusinessException;
 import com.example.LibraryManagementSystem.core.security.services.JwtService;
-import com.example.LibraryManagementSystem.entities.User;
+import com.example.LibraryManagementSystem.model.entities.User;
 import com.example.LibraryManagementSystem.repositories.UserRepository;
 import com.example.LibraryManagementSystem.services.abstracts.AuthService;
 import com.example.LibraryManagementSystem.services.dtos.requests.loginregister.LoginRequest;

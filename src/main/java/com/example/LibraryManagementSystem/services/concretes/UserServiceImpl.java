@@ -1,14 +1,16 @@
 package com.example.LibraryManagementSystem.services.concretes;
 
 import com.example.LibraryManagementSystem.core.exceptionhandling.exception.types.BusinessException;
-import com.example.LibraryManagementSystem.entities.User;
+import com.example.LibraryManagementSystem.model.entities.User;
 import com.example.LibraryManagementSystem.repositories.UserRepository;
 import com.example.LibraryManagementSystem.services.abstracts.UserService;
 import com.example.LibraryManagementSystem.services.dtos.requests.user.AddUserRequest;
 import com.example.LibraryManagementSystem.services.dtos.requests.user.UpdateUserRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.user.*;
 import com.example.LibraryManagementSystem.services.mappers.UserMapper;
+import com.example.LibraryManagementSystem.services.rules.UserBusinessRule;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -20,10 +22,12 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
     private  UserRepository userRepository;
+    @Autowired
+    private UserBusinessRule userBusinessRule;
 
     @Override
     public AddUserResponse add(AddUserRequest request) {
-        userNameWithSameNameShouldNotExist(request.getName());
+        userBusinessRule.userNameWithSameNameShouldNotExist(request.getName());
         User user = UserMapper.INSTANCE.userFromAddRequest(request);
         user = userRepository.save(user);
 
@@ -70,13 +74,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(int id) {
        return userRepository.findById(id).orElseThrow(() -> new BusinessException("Böyle bir kullanıcı bulunamamıştır."));
-    }
-
-    private void userNameWithSameNameShouldNotExist(String name){
-        Optional<User> userWithSameName = userRepository.findByNameIgnoreCase(name);
-        if (userWithSameName.isPresent()){
-            throw new BusinessException("Bu isimde bir kullanıcı zaten var.");
-        }
     }
 
     @Override

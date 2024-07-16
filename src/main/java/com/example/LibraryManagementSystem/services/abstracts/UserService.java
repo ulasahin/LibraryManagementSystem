@@ -1,6 +1,6 @@
 package com.example.LibraryManagementSystem.services.abstracts;
 
-import com.example.LibraryManagementSystem.entities.User;
+import com.example.LibraryManagementSystem.model.entities.User;
 import com.example.LibraryManagementSystem.services.dtos.requests.user.AddUserRequest;
 import com.example.LibraryManagementSystem.services.dtos.requests.user.UpdateUserRequest;
 import com.example.LibraryManagementSystem.services.dtos.responses.user.*;

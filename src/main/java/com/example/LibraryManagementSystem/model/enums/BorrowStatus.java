@@ -1,4 +1,4 @@
-package com.example.LibraryManagementSystem.entities;
+package com.example.LibraryManagementSystem.model.enums;
 
 public enum BorrowStatus {
     RETURNED,
